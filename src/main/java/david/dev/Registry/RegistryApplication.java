@@ -10,9 +10,12 @@ import java.time.LocalDate;
 public class RegistryApplication {
 
 	public static void main(String[] args) {
-		Lecturer lecturer1 = new Lecturer(12L, "Francis Egno", "fe@email.com", LocalDate.of(1953, 3, 22), "Sciences", "Lecturer II", "Level Adviser");
+		Lecturer lecturer1 = new Lecturer(12L, "Francis Egno", "fe@email.com", LocalDate.of(1953, 3, 22), "Male", "Sciences", "Lecturer II", "Level Adviser");
 
 		int age = lecturer1.calcAge();
+		int salary = lecturer1.calcSalary();
+		String pronoun;
+		if lecturer1
 
 		System.out.printf("the age of %s is %d", lecturer1.getName(), age);
 //		SpringApplication.run(RegistryApplication.class, args);

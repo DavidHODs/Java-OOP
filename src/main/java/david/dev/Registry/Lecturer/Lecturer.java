@@ -8,17 +8,20 @@ public class Lecturer {
     private String name;
     private String email;
     private LocalDate dob;
+
+    private String gender;
     private String college;
     private String designation;
-
     private String post;
+    private int salary;
 
     public Lecturer(Long id, String name, String email, LocalDate dob,
-                    String college, String designation, String post) {
+                    String gender, String college, String designation, String post) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.dob = dob;
+        this.gender = gender;
         this.college = college;
         this.designation = designation;
         this.post = post;
@@ -28,6 +31,53 @@ public class Lecturer {
     public int calcAge() {
         Period period = Period.between(this.dob, LocalDate.now());
         return period.getYears();
+    }
+
+//    calcSalary calculates salary of lecturer from provided object info
+    public int calcSalary() {
+        int salary;
+        int postSalary;
+
+        switch (this.designation) {
+            case "Assistant Lecturer":
+                salary = 10000;
+                break;
+            case "Lecturer I":
+                salary = 20000;
+                break;
+            case "Lecturer II":
+                salary = 30000;
+                break;
+            case "Senior Lecturer":
+                salary = 40000;
+                break;
+            case "Associate Professor":
+                salary = 50000;
+                break;
+            case "Professor":
+                salary = 60000;
+                break;
+            default:
+                salary = 0;
+                System.out.printf("%s is not a valid option\n", this.designation);
+                break;
+        }
+
+        switch (this.post) {
+            case "Level Adviser":
+                postSalary = 2000;
+            case "HOD":
+                postSalary = 2500;
+            case "Provost":
+                postSalary = 3500;
+            case "Vice Chancellor":
+                postSalary = 5000;
+            default:
+                postSalary = 0;
+                System.out.printf("%s is not a valid post", this.post);
+        }
+
+        return salary + postSalary;
     }
 
     public Long getId() {
@@ -84,5 +134,13 @@ public class Lecturer {
 
     public void setPost(String post) {
         this.post = post;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
