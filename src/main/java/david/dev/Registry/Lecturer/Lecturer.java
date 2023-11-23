@@ -5,6 +5,7 @@ import java.time.Period;
 
 public class Lecturer {
     private Long id;
+    private String code;
     private String name;
     private String email;
     private LocalDate dob;
@@ -13,12 +14,12 @@ public class Lecturer {
     private String college;
     private String designation;
     private String post;
-    private int salary;
 
 
-    public Lecturer(Long id, String name, String email, LocalDate dob,
+    public Lecturer(Long id, String code, String name, String email, LocalDate dob,
                     String gender, String college, String designation, String post) {
         this.id = id;
+        this.code = code;
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -28,7 +29,7 @@ public class Lecturer {
         this.post = post;
     }
 
-    public Lecturer(Long id, String name, String email, LocalDate dob, String gender, String college) {
+    public Lecturer(Long id, String code, String name, String email, LocalDate dob, String gender, String college) {
     }
 
     //    calcAge calculates age based on supplied dob
@@ -64,21 +65,26 @@ public class Lecturer {
             default:
                 salary = 0;
                 System.out.printf("%s is not a valid option\n", this.designation);
-                break;
+                return salary;
         }
 
         switch (this.post) {
             case "Level Adviser":
                 postSalary = 2000;
+                break;
             case "HOD":
                 postSalary = 2500;
+                break;
             case "Provost":
                 postSalary = 3500;
+                break;
             case "Vice Chancellor":
                 postSalary = 5000;
+                break;
             default:
                 postSalary = 0;
-                System.out.printf("%s is not a valid post", this.post);
+                System.out.printf("%s is not a valid post\n", this.post);
+                return salary;
         }
 
         return salary + postSalary;
@@ -104,6 +110,15 @@ public class Lecturer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+//    generates a staff id code
+    public void setCode(String code) {
+        this.code = "stf/" + this.college + "/" + code;
     }
 
     public String getName() {
