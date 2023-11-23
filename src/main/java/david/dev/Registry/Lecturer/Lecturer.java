@@ -15,6 +15,7 @@ public class Lecturer {
     private String post;
     private int salary;
 
+
     public Lecturer(Long id, String name, String email, LocalDate dob,
                     String gender, String college, String designation, String post) {
         this.id = id;
@@ -27,7 +28,10 @@ public class Lecturer {
         this.post = post;
     }
 
-//    calcAge calculates age based on supplied dob
+    public Lecturer(Long id, String name, String email, LocalDate dob, String gender, String college) {
+    }
+
+    //    calcAge calculates age based on supplied dob
     public int calcAge() {
         Period period = Period.between(this.dob, LocalDate.now());
         return period.getYears();
@@ -80,6 +84,7 @@ public class Lecturer {
         return salary + postSalary;
     }
 
+//    pronoun returns right pronoun based on supplied details
     public String pronoun() {
         String pro;
         if ("Male".equals(this.gender) || "M".equals(this.gender)) {
