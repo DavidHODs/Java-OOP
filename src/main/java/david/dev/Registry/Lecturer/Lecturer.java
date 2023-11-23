@@ -1,41 +1,21 @@
 package david.dev.Registry.Lecturer;
 
+import david.dev.Registry.Person.Person;
+
 import java.time.LocalDate;
-import java.time.Period;
 
-public class Lecturer {
-    private Long id;
-    private String code;
-    private String name;
-    private String email;
-    private LocalDate dob;
-
-    private String gender;
+public class Lecturer extends Person {
     private String college;
-    private String designation;
-    private String post;
+    private final String designation;
+    private final String post;
 
 
     public Lecturer(Long id, String code, String name, String email, LocalDate dob,
                     String gender, String college, String designation, String post) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-        this.gender = gender;
+        super(id, code, name, email, dob, gender);
         this.college = college;
         this.designation = designation;
         this.post = post;
-    }
-
-    public Lecturer(Long id, String code, String name, String email, LocalDate dob, String gender, String college) {
-    }
-
-    //    calcAge calculates age based on supplied dob
-    public int calcAge() {
-        Period period = Period.between(this.dob, LocalDate.now());
-        return period.getYears();
     }
 
 //    calcSalary calculates salary of lecturer from provided object info
@@ -65,7 +45,7 @@ public class Lecturer {
             default:
                 salary = 0;
                 System.out.printf("%s is not a valid option\n", this.designation);
-                return salary;
+                break;
         }
 
         switch (this.post) {
@@ -84,65 +64,16 @@ public class Lecturer {
             default:
                 postSalary = 0;
                 System.out.printf("%s is not a valid post\n", this.post);
-                return salary;
+                break;
         }
 
         return salary + postSalary;
     }
 
-//    pronoun returns right pronoun based on supplied details
-    public String pronoun() {
-        String pro;
-        if ("Male".equals(this.gender) || "M".equals(this.gender)) {
-            pro = "He/Him";
-        } else if ("Female".equals(this.gender) || "F".equals(this.gender)) {
-            pro = "She/Her";
-        } else {
-            pro = "They/Them";
-        }
-
-        return pro;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-//    generates a staff id code
-    public void setCode(String code) {
-        this.code = "stf/" + this.college + "/" + code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
+//    generates a staff id code. overrides parent's method implementation
+    @Override
+    public String createCode() {
+        return ("stf/" + this.college + "/" + super.createCode());
     }
 
     public String getCollege() {
@@ -151,29 +82,5 @@ public class Lecturer {
 
     public void setCollege(String college) {
         this.college = college;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public String getPost() {
-        return post;
-    }
-
-    public void setPost(String post) {
-        this.post = post;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 }
