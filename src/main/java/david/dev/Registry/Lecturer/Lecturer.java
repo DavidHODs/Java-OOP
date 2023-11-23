@@ -80,6 +80,19 @@ public class Lecturer {
         return salary + postSalary;
     }
 
+    public String pronoun() {
+        String pro;
+        if ("Male".equals(this.gender) || "M".equals(this.gender)) {
+            pro = "He/Him";
+        } else if ("Female".equals(this.gender) || "F".equals(this.gender)) {
+            pro = "She/Her";
+        } else {
+            pro = "They/Them";
+        }
+
+        return pro;
+    }
+
     public Long getId() {
         return id;
     }
