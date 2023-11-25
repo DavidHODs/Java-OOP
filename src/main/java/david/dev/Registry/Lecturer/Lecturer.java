@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "lecturer")
 public class Lecturer extends Person {
     @Id
     @SequenceGenerator(
@@ -18,19 +18,23 @@ public class Lecturer extends Person {
             strategy = GenerationType.SEQUENCE,
             generator = "lecturer_sequence"
     )
+    private Long lecturerId;
+
     private String college;
-    private final String designation;
-    private final String post;
+    private String designation;
+    private String post;
 
-
-    public Lecturer(Long id, String code, String name, String email, LocalDate dob,
+    public Lecturer (String code, String name, String email, LocalDate dob,
                     String gender, String college, String designation, String post) {
-        super(id, code, name, email, dob, gender);
+        super(code, name, email, dob, gender);
         this.college = college;
         this.designation = designation;
         this.post = post;
     }
 
+    public Lecturer() {
+        super();
+    }
 //    calcSalary calculates salary of lecturer from provided object info
     public int calcSalary() {
         int salary;
@@ -85,8 +89,8 @@ public class Lecturer extends Person {
 
 //    generates a staff id code. overrides parent's method implementation
     @Override
-    public String createCode() {
-        return ("stf/" + this.college + "/" + super.createCode());
+    public void setCode(String code) {
+        super.setCode("stf/" + this.college + "/" + super.getCode());
     }
 
     public String getCollege() {
