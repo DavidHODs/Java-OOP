@@ -1,10 +1,23 @@
 package david.dev.Registry.Lecturer;
 
 import david.dev.Registry.Person.Person;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+@Entity
+@Table
 public class Lecturer extends Person {
+    @Id
+    @SequenceGenerator(
+            name = "lecturer_sequence",
+            sequenceName = "lecturer_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "lecturer_sequence"
+    )
     private String college;
     private final String designation;
     private final String post;
